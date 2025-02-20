@@ -1,0 +1,51 @@
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+.navbar::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(30px);
+    z-index: -1;
+}
+
+.navbar .navbar-brand {
+    font-size: 2rem;
+    font-family: "Redressed", serif;
+    font-weight: 400;
+    font-style: normal; 
+    color: var(--white);    
+}
+
+.navbar-toggler {
+    color: var(--white);    
+    border-color: var(--white);
+    margin-left: 0.7rem;
+    font-size: 2rem;
+    cursor: pointer;
+}
+
+.navbar-toggler:hover {
+    color: var(--gold);
+}
+
+.navbar-collapse .nav-link {
+    font-size: 1.2rem;
+    color: var(--white);
+    font-weight: 500;
+}
+
+.navbar-nav .nav-link.active {
+    color: var(--gold);
+}
+
+.navbar a:hover {
+    color: var(--gold);
+}

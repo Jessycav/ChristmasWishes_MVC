@@ -1,0 +1,37 @@
+@media (min-width: 768px) {
+    #page .container .wishlist .container {
+        width: 70%;
+    }
+
+    #page .container {
+        width: 95%;
+    }
+
+    #page .container .wishlist .new-list-btn {
+        display: flex;
+        justify-content: center;
+        margin-top: 1rem;
+        width: 100%;
+    }
+}
+
+@media (min-width: 1024px) {
+    .navbar-collapse .nav-link {
+        margin-right: 1.3rem;
+    }
+
+    #home .main {
+        margin-right: 3%;
+        width: 50%;
+    }
+
+    #home p {
+        color: var(--white);
+    }
+
+    #page .container .wishlist .container {
+        width: 50%;  
+        height: auto;
+    }    
+    
+}

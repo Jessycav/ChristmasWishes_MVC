@@ -1,0 +1,50 @@
+
+#page .container .wishlist .container {
+    margin: auto;
+    width: 100%;
+    height: auto;
+    padding: 1rem;
+}
+
+#page .container .wishlist h5 {
+    color: var(--black);
+    font-size: 1.2rem;
+}
+
+#page .container .wishlist .card .card-title {
+    text-transform: uppercase;
+    text-decoration-line: underline;
+    font-weight: bold;
+}
+
+#page .container .wishlist .btn {
+    padding: 5px;
+    border: 2px solid var(--gold);
+    background-color: var(--white);
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer; 
+}
+
+#page .container .wishlist .btn:hover {
+    background-color: var(--green);
+    color: var(--white);
+    border: none;
+}
+
+#page .container .wishlist .new-list-btn .btn {
+    margin: 0.5rem;
+    padding: 0.2rem 0.5rem;
+    background-color: var(--gold);
+    color: var(--red);
+    font-size: 1.2rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#page .container .wishlist .card .offer-button[data-status="offered"] {
+    background-color: #ccc;
+    color: var(--red);
+    cursor: not-allowed;
+}
