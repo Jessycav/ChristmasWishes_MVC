@@ -8,10 +8,10 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="accueil">Accueil</a>
+                        <a class="nav-link active" aria-current="page" href="<?=ROOT?>">Accueil</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="listes">Voir les listes</a>
+                        <a class="nav-link" href="<?=ROOT?>listes/toutesleslistes">Voir les listes</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/authentication">Mon compte</a>

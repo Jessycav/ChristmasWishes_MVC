@@ -90,5 +90,5 @@ ob_start(); //Stocke les informations temporairement
 
 <?php
 $content = ob_get_clean(); // Renvoie les informations stokées et vide le stockage
-require_once("app/views/components/layout.php");
+require_once("./views/components/layout.php");
 ?>

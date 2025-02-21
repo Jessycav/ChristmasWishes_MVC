@@ -1,15 +1,25 @@
 <?php
 
-require_once './config/Database.php'; //Connexion à la base de données
+require_once ("./config/Database.php"); //Connexion à la base de données
 
-class WishlistModel {
-    private $conn;
+class WishlistsModel extends Database {
+    private $wishlist_id;
+    private $wishlist_year;
+    private $wishlist_recipient;
+
+    public function __construct($wishlist_id = null, $wishlist_year = null, $wishlist_recipient = null) {
+        $this->wishlist_id = $wishlist_id;
+        $this->wishlist_year = $wishlist_year;
+        $this->$wishlist_recipient = $wishlist_recipient;
+
+    }
 
     public function getAllLists() {
         $sql= "SELECT * FROM wishlist";
-        $stmt = $this->conn->prepare($sql);
+        $stmt = $this->connect()->prepare($sql);
         $stmt->execute();
         $wishlists = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $stmt->closeCursor();
         return $wishlists;
     }
        
@@ -47,5 +57,3 @@ class WishlistModel {
         return $stmt->execute();
     }*/
 }
-
-?>

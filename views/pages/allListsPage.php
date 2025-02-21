@@ -7,7 +7,7 @@ ob_start(); //Stocke les informations temporairement
         <!--Titre centré-->
         <div class="container-header row">
             <div class="col-12 text-center">
-                <h2>listes disponibles</h2>
+                <h2>Listes disponibles</h2>
             </div>
             <hr>
         </div>
@@ -28,13 +28,15 @@ ob_start(); //Stocke les informations temporairement
                 <!-- Une carte -->
                 <div class="col">
                     <div class="card">                        
-                        <?php foreach ($wishlists as $wishlist): ?>
+                        <?php 
+                        foreach ($wishlists as $wishlist): 
+                        ?>
                         <div class="card-header">
-                            LISTE DE NOEL - <?php echo htmlspecialchars($wishlist['year']); ?>
+                            LISTE DE NOEL - <?php echo htmlspecialchars($wishlist['wishlist_year']); ?>
                         </div>
                         <div class="card-body">
-                            <h5 class="card-title">Liste pour <?php echo htmlspecialchars($wishlist['recipient']); ?></h5>
-                            <p class="card-text">Voici tous les présents souhaités par <?php echo htmlspecialchars($wishlist['recipient']); ?></p>
+                            <h5 class="card-title">Liste pour <?php echo htmlspecialchars($wishlist['wishlist_recipient']); ?></h5>
+                            <p class="card-text">Voici tous les présents souhaités par <?php echo htmlspecialchars($wishlist['wishlist_recipient']); ?></p>
                             <a href="/listDetail" class="btn">Voir la liste</a>
                         </div>
                         <div class="card-footer text-body-secondary">
@@ -111,5 +113,5 @@ ob_start(); //Stocke les informations temporairement
 
 <?php
 $content = ob_get_clean(); // Renvoie les informations stokées et vide le stockage
-require_once("app/views/components/layout.php");
+require_once("./views/components/layout.php");
 ?>

@@ -1,18 +1,24 @@
 <?php
-require_once __DIR__ . '/../models/wishlistModel.php';
 
+require_once("./models/WishlistsModel.php");
 
-class WishlistController {
-    public $WishlistModel;
+class WishlistsController {
+    
+    public $wishlistsModel;
 
     public function __construct() {
-        $this->WishlistModel = new WishlistModel();
+        $this->wishlistsModel = new WishlistsModel();
     }
 
     public function allLists() {
-        $wishlists = $this->WishlistModel->getAllLists();
-        require_once __DIR__ . '/../views/pages/allListsPage.php';
+        
+        $wishlists = $this->wishlistsModel->getAllLists();
+        require __DIR__ . '/../views/pages/allListsPage.php';
     }
+
+    /*public function allLists() { 
+        require_once ("./app/views/pages/allListsPage.php");
+    }*/
 
     /*public function createWishlist() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_SESSION['user_id'])) {
