@@ -14,7 +14,7 @@
                         <a class="nav-link" href="<?=ROOT?>listes/toutesleslistes">Voir les listes</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/authentication">Mon compte</a>
+                        <a class="nav-link" href="<?=ROOT?>monCompte/authentification">Mon compte</a>
                     </li>
                 </ul>
             </div>

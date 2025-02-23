@@ -37,7 +37,7 @@ ob_start(); //Stocke les informations temporairement
                         <div class="card-body">
                             <h5 class="card-title">Liste pour <?php echo htmlspecialchars($wishlist['wishlist_recipient']); ?></h5>
                             <p class="card-text">Voici tous les présents souhaités par <?php echo htmlspecialchars($wishlist['wishlist_recipient']); ?></p>
-                            <a href="/listDetail" class="btn">Voir la liste</a>
+                            <a href="<?=ROOT?>listes/detailListe" class="btn">Voir la liste</a>
                         </div>
                         <div class="card-footer text-body-secondary">
                             Ajouté par [Nom] [Prénom]

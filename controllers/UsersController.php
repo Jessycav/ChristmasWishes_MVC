@@ -1,22 +1,28 @@
 <?php
-require_once "app/models/User.php";
 
-class UserController {
-    private $userModel;
+require_once("./models/UsersModel.php");
 
-    public function __construct($db) {
-        $this->userModel = new User($db);
+class UsersController {
+
+    private $usersModel;
+
+    public function __construct() {
+        $this->usersModel = new UsersModel();
     }
 
-    public function register() {
+    public function dashboardPage() { 
+        require_once ("./views/pages/dashboardPage.php");
+    }
+
+    public function createAccount() {
         if($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $firstname = htmlspecialchars($_POST['firstname'], ENT_QUOTES);
-            $lastname = htmlspecialchars($_POST['lastname'], ENT_QUOTES);
+            $user_firstname = htmlspecialchars($_POST['user_firstname'], ENT_QUOTES);
+            $user_lastname = htmlspecialchars($_POST['user_lastname'], ENT_QUOTES);
             $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
             $password = $_POST['password'];
 
-            if ($this->userModel->register($firstname, $lastname, $email, $password)) {
-                header("Location: /account");
+            if ($this->usersModel->register($user_firstname, $user_lastname, $email, $password)) {
+                header("Location: /login");
                 exit();
             } else {
                 echo "Echec de l'inscription";
@@ -29,11 +35,11 @@ class UserController {
             $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
             $password = $_POST['password'];
 
-            $user = $this->userModel->login($email, $password);
+            $user = $this->usersModel->login($email, $password);
 
             if ($user) {
                 $_SESSION['user_id'] = $user['user_id'];
-                header("Location: /dashboard");
+                header("Location: /monCompte/dashboard");
                 exit();
             } else {
                 echo "Email ou mot de passe incorrect";
@@ -43,7 +49,7 @@ class UserController {
 
     public function logout() {
         session_destroy();
-        header("Location: /authentication");
+        header("Location: /authenticationPage");
         exit();
     }
 }

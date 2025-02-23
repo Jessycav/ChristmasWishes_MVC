@@ -10,8 +10,7 @@ class WishlistsModel extends Database {
     public function __construct($wishlist_id = null, $wishlist_year = null, $wishlist_recipient = null) {
         $this->wishlist_id = $wishlist_id;
         $this->wishlist_year = $wishlist_year;
-        $this->$wishlist_recipient = $wishlist_recipient;
-
+        $this->wishlist_recipient = $wishlist_recipient;
     }
 
     public function getAllLists() {
@@ -21,39 +20,53 @@ class WishlistsModel extends Database {
         $wishlists = $stmt->fetchAll(PDO::FETCH_ASSOC);
         $stmt->closeCursor();
         return $wishlists;
-    }
-       
-    /*public function getUserWishlists($user_id) {
-        $query = "SELECT * FROM " . $this->table_name . " WHERE user_id = :user_id";
-        $stmt = $this->conn->prepare($query);
+    }   
+    
+    public function createWishlist($wishlist_year, $wishlist_recipient, $user_id) {
+        $sql = "INSERT INTO wishlist(wishlist_year, wishlist_recipient, user_id) VALUES (:wishlist_year, :wishlist_recipient, :user_id)";
+        $stmt = $this->connect()->prepare($sql);
+        $stmt->bindParam(":wishlist_year", $wishlist_year);
+        $stmt->bindParam(":wishlist_recipient", $wishlist_recipient);
         $stmt->bindParam(":user_id", $user_id);
         $stmt->execute();
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
-    }
-
-    public function createWishlist($year, $recipient, $user_id) {
-        $query = "INSERT INTO " . $this->table_name . " (wishlist_year, wishlist_recipient, user_id) VALUES (:year, :recipient, :user_id)";
-        $stmt = $this->conn->prepare($query);
-
-        $stmt->bindParam(":year", $year);
-        $stmt->bindParam(":recpient", $recipient);
+        $newWishlists = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $stmt->closeCursor();
+        return $newWishlists;
+    }    
+    
+    public function getUserWishlists($user_id) {
+        $sql = "SELECT * FROM user WHERE user_id = :user_id";
+        $stmt = $this->connect()->prepare($sql);
         $stmt->bindParam(":user_id", $user_id);
-
-        return $stmt->execute();
-    }
+        $stmt->execute();
+        $myWishlists = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $stmt->closeCursor();
+        return $myWishlists;
+    }    
 
     public function getWishlistById($wishlist_id) {
-        $query = "SELECT * FROM " . $this->table_name . " WHERE wishlist_id = :wishlist_id";
-        $stmt = $this->conn->prepare($query);
-        $stmt->bindParam(":wishlist_id", $wishlist_id);
+        $sql = "SELECT * FROM wishlist WHERE wishlist_id = :wishlist_id";
+        $stmt = $this->connect()->prepare($sql);
+        $stmt->bindParam(":wishlist_id", $wishlist_id, PDO::PARAM_INT);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public function deleteWishlist($wishlist_id) {
-        $query = "DELETE FROM " . $this->table_name . " WHERE wishlist_id = :wishlist_id";
-        $stmt = $this->conn->prepare($query);
+        $sql = "DELETE FROM wishlist WHERE wishlist_id = :wishlist_id";
+        $stmt = $this->connect()->prepare($sql);
         $stmt->bindParam(":wishlist_id", $wishlist_id);
         return $stmt->execute();
+    }
+}    
+
+/*public function getListDetail() {
+        $sql = "SELECT * FROM gift WHERE wishlist_id = :wishlist_id";
+        $stmt = $this->connect()->prepare($sql);
+        $stmt->bindParam(":wishlist_id", $wishlist_id);
+        $stmt->execute();
+        $wishlists = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $stmt->closeCursor();
+        return $wishlists;
     }*/
-}
+       

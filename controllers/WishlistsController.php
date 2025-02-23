@@ -11,23 +11,18 @@ class WishlistsController {
     }
 
     public function allLists() {
-        
         $wishlists = $this->wishlistsModel->getAllLists();
         require __DIR__ . '/../views/pages/allListsPage.php';
     }
 
-    /*public function allLists() { 
-        require_once ("./app/views/pages/allListsPage.php");
-    }*/
-
-    /*public function createWishlist() {
+    public function createWishlist() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_SESSION['user_id'])) {
-            $year = filter_var($_POST['wishlist_year'], FILTER_VALIDATE_INT);
-            $recipient = htmlspecialchars($_POST['wishlist_recipient'], ENT_QUOTES);
+            $wishlist_year = filter_var($_POST['wishlist_year'], FILTER_VALIDATE_INT);
+            $wishlist_recipient = htmlspecialchars($_POST['wishlist_recipient'], ENT_QUOTES);
             $user_id = $_SESSION['user_id'];
 
-            if ($this->wishlistModel->createWishlist($year, $recipient, $user_id)) {
-                header("Location: /dashboard");
+            if ($newWishlists = $this->wishlistsModel->createWishlist($wishlist_year, $wishlist_recipient, $user_id)) {
+                header("Location: /viewMyListsPage.php");
             } else {
                 echo "Erreur de création de la liste";
             }
@@ -37,19 +32,24 @@ class WishlistsController {
     public function viewUserWishlists() {
         if (isset($_SESSION['user_id'])) {
             $user_id = $_SESSION['user_id'];
-            return $this->wishlistModel->getUserWishlists($user_id);
+            $myWishlists = $this->wishlistsModel->getUserWishlists($user_id);
+            require __DIR__ . '/../views/pages/viewMyListsPage.php';
         }
         return [];
     }
 
+    public function viewWishlistDetail($wishlist_id) {
+        return $this->wishlistsModel->getWishlistById($wishlist_id);
+    }
+
     public function deleteWishlist($wishlist_id) {
         if (isset($_SESSION['user_id'])) {
-            if ($this->wishlistModel->deleteWishlist($wishlist_id)) {
+            if ($this->wishlistsModel->deleteWishlist($wishlist_id)) {
                 header("Location: /dashboard");
             } else {
                 echo "Erreur de suppression de la liste";
             }
         }
-    }*/
+    }
 }
 ?>
