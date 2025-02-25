@@ -6,64 +6,28 @@ ob_start(); //Stocke les informations temporairement
     <div class="container">
         <div class="container-header row">
             <div class="col-12 text-center">
-                <h2>Mon compte</h2>
+                <h2>DASHBOARD</h2>
                 <hr>
             </div>
         </div>
-        <!-- Ajout sous forme de cartes -->
-        <div class="wishlist">
-            <div class="col-12 col-md-6">
-                <div class="card">
-                    <div class="card-body">
-                        <h4 class="card-title">Informations personnelles</h4>
+        <div class="container-fluid">
+            <div class="row">
+                <!--Main content-->
+                <div class="col-md-9 col-lg-100 px-4"> 
+                    <div class="col-md-8 col-lg-100 px-4">
+                        <h2>BIENVENUE SUR VOTRE ESPACE CLIENT</h2>
                         <hr>
-                        <p class="card-text">Prénom : <?= htmlspecialchars($_SESSION['user_firstname']) ?></p>
-                        <p class="card-text">Nom : <?= htmlspecialchars($_SESSION['user_lastname']) ?></p>
-                        <p class="card-text">Adresse mail : <?= htmlspecialchars($_SESSION['email']) ?></p>
                     </div>
                 </div>
-            </div>
-            <div class="col-12 col-md-6">            
-                <div class="card">
-                    <div class="card-body">
-                        <h3>Changer mon mot de passe</h3>
-                        <form class="row g-3" id="account-form" method="POST" name="changePassword" action="user_account.php">
-                            <div class="form-floating">
-                                <input type="password" class="form-control" name="current_password" id="floatingPassword" placeholder="Mot de passe" required>
-                                <label for="floatingPassword"><i class="fa-solid fa-key"></i> Mot de passe actuel</label>
-                            </div>
-                            <div class="form-floating">
-                                <input type="password" class="form-control" name="new_password" id="floatingPassword" placeholder="Mot de passe" required>
-                                <label for="floatingPassword"><i class="fa-solid fa-key"></i> Nouveau mot de passe</label>
-                            </div>
-                            <div class="form-floating">
-                                <input type="password" class="form-control" name="confirm_password" id="floatingPassword" placeholder="Confirmation du nouveau mot de passe" required>
-                                <label for="floatingPassword"><i class="fa-solid fa-key"></i> Confirmation du mot de passe</label>
-                            </div>
-                            <div class="col-12 text-center">
-                                <input type="submit" class="btn w-auto" name="changePassword" data-bs-toggle="modal" data-bs-target="#changePasswordModal" value="Changer le mot de passe">
-                                <!-- Fenêtre modale -->
-                                <div class="modal fade" id="changePasswordModal" tabindex="-1" aria-labelledby="changePasswordModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog modal-dialog-centered">
-                                        <div class="modal-content">
-                                            <div class="modal-body">
-                                                <p>Le mot de passe a été modifié</p>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn close" data-bs-dismiss="modal">Fermer</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>                
-                        </form>
-                    </div> 
-                </div>              
-            </div>
-            <hr>
-            <div class="col-12 text-center new-list-btn">
-                <a href="<?=ROOT?>monCompte/mesListes"><button class="btn me-4 w-auto">Voir mes listes</button></a>
-                <a href="logout.php" id="logout"><button class="btn">Se déconnecter</button></a>
+                <!-- Sidebar-->
+                <nav class="col-md-4 col-lg-2 sidebar">
+                    <div class="text-center">
+                        <div class="profile-img"><i class="fa-solid fa-circle-user"></i></div>
+                    </div>
+                    <a href="<?= ROOT ?>monCompte/profil">Mon profil</a>
+                    <a href="<?= ROOT ?>monCompte/mesListes">Mes listes</a>
+                    <a href="logout">Se déconnecter</a>
+                </nav>
             </div>
         </div>
     </div>

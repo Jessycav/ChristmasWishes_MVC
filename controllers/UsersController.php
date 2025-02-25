@@ -4,7 +4,7 @@ require_once("./models/UsersModel.php");
 
 class UsersController {
 
-    private $usersModel;
+    public $usersModel;
 
     public function __construct() {
         $this->usersModel = new UsersModel();
@@ -12,26 +12,47 @@ class UsersController {
 
     public function dashboardPage() { 
         require_once ("./views/pages/dashboardPage.php");
-    }
-
-    public function createAccount() {
-        if($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $user_firstname = htmlspecialchars($_POST['user_firstname'], ENT_QUOTES);
-            $user_lastname = htmlspecialchars($_POST['user_lastname'], ENT_QUOTES);
-            $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
-            $password = $_POST['password'];
-
-            if ($this->usersModel->register($user_firstname, $user_lastname, $email, $password)) {
-                header("Location: /login");
-                exit();
+    } 
+    
+    public function createAccount($user_firstname, $user_lastname, $email, $password) {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+            if (!$this->usersModel->getUserByEmail($email)) {
+                if ($this->usersModel->createAccountDB($user_firstname, $user_lastname, $email, $hashedPassword)) {
+                    header("Location: " . ROOT . "monCompte/authentification");
+                } else {
+                    echo "Echec de l'inscription";
+                }
             } else {
-                echo "Echec de l'inscription";
+                throw new Exception ("Les noms et prénoms saisis sont déjà pris");
             }
         }
     }
 
-    public function login() {
-        if($_SERVER['REQUEST_METHOD'] === 'POST') {
+    public function login($email, $password) {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $datasUser = $this->usersModel->getUserByEmail($email);
+            if ($this->usersModel->isAccountValid($email, $password)) {
+                $_SESSION['email'] = $datasUser['email'];
+                $_SESSION['user_id'] = $datasUser['user_id'];
+                header("Location: " . ROOT . "monCompte/dashboard");
+            } else {
+                echo "Le mot de passe saisi est incorrect";
+                header("Location: " . ROOT . "monCompte/authentification");
+            }
+        }
+    }
+
+    public function showProfile($user_id) {
+        return $this->usersModel->getUserById($user_id);
+    }
+
+    public function logout() {
+        session_destroy();
+        header("Location: " . ROOT);
+    }
+
+/*         if($_SERVER['REQUEST_METHOD'] === 'POST') {
             $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
             $password = $_POST['password'];
 
@@ -44,13 +65,6 @@ class UsersController {
             } else {
                 echo "Email ou mot de passe incorrect";
             }
-        }
-    }
-
-    public function logout() {
-        session_destroy();
-        header("Location: /authenticationPage");
-        exit();
-    }
+        } */
 }
 ?>

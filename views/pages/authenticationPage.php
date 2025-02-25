@@ -19,7 +19,7 @@ ob_start(); //Stocke les informations temporairement
                     <div class="form-section">
                         <h3>CONNEXION</h3>
                         <!--Espace de connexion-->
-                        <form method="POST" action="login">
+                        <form method="POST" action="<?=ROOT?>monCompte/connexion">
                             <div class="form-floating mb-3">
                                 <input type="email" class="form-control" id="floatingInput" name="email" placeholder="name@example.com" required>
                                 <label for="floatingInput"><i class="fa-solid fa-envelope me-2"></i>Adresse email</label>
@@ -40,13 +40,13 @@ ob_start(); //Stocke les informations temporairement
                     <div class="form-section">
                         <h3>INSCRIPTION</h3>
                         <!--Espace d'inscription-->
-                        <form method="POST">
+                        <form method="POST" action="<?=ROOT?>monCompte/inscription">
                             <div class="form-floating mb-3">
-                                <input type="text" class="form-control" id="floatingInput" name="firstname" placeholder="First name" aria-label="First name">
+                                <input type="text" class="form-control" id="floatingInput" name="user_firstname" placeholder="First name" aria-label="First name">
                                 <label for="floatingInput"><i class="fa-solid fa-user me-2"></i>Prénom</label>
                             </div>
                             <div class="form-floating mb-3">
-                                <input type="text" class="form-control" id="floatingInput" name="lastname" placeholder="Last name" aria-label="Last name">
+                                <input type="text" class="form-control" id="floatingInput" name="user_lastname" placeholder="Last name" aria-label="Last name">
                                 <label for="floatingInput"><i class="fa-solid fa-user me-2"></i>Nom</label>
                             </div>
                             <div class="form-floating mb-3">
@@ -57,13 +57,9 @@ ob_start(); //Stocke les informations temporairement
                                 <input type="password" class="form-control" id="floatingPassword" name="password" placeholder="Password">
                                 <label for="floatingPassword"><i class="fa-solid fa-key me-2"></i>Mot de passe</label>
                             </div>
-                            <div class="form-floating">
-                                <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
-                                <label for="floatingPassword"><i class="fa-solid fa-key me-2"></i>Confirmation du mot de passe</label>
-                            </div>
                             <div class="form-floating col-12">
                                 <!-- Bouton fenêtre modale -->
-                                <a href="<?=ROOT?>authentification"><button type="submit" class="btn" name="register" data-bs-toggle="modal" data-bs-target="#exampleModal">S'inscrire</button></a>
+                                <a href="<?=ROOT?>monCompte/authentification"><button type="submit" class="btn" name="createAccount" data-bs-toggle="modal" data-bs-target="#exampleModal">S'inscrire</button></a>
 
                                 <!-- Fenêtre modale -->
                                 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

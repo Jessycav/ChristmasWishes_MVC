@@ -17,40 +17,58 @@ class UsersModel extends Database {
         $this->password = $password;
     }
     
-    public function register($firstname, $lastname, $email, $password) {
-        $query = "INSERT INTO user(user_firstname, user_lastname, email, password) VALUES (:user_firstname, :user_lastname, :email, :password)";
-        $stmt = $this->connect()->prepare($query);
-        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-
-        $stmt->bindParam(':user_firstname', $firstname);
-        $stmt->bindParam(':user_lastname', $lastname);
-        $stmt->bindParam(':email', $email);
-        $stmt->bindParam(':password', $hashedPassword);
-        
-        return $stmt->execute();
+    public function createAccountDB($user_firstname, $user_lastname, $email, $password) {
+        $sql = "INSERT INTO user (user_firstname, user_lastname, email, password) VALUES (:user_firstname, :user_lastname, :email, :password)";
+        $stmt = $this->connect()->prepare($sql);
+        $stmt->bindParam(':user_firstname', $user_firstname, PDO::PARAM_STR);
+        $stmt->bindParam(':user_lastname', $user_lastname, PDO::PARAM_STR);
+        $stmt->bindParam(':email', $email, PDO::PARAM_STR);
+        $stmt->bindParam(':password', $password, PDO::PARAM_STR);
+        $stmt->execute();
+        $isCreate = ($stmt->rowCount()>0);
+        $stmt->closeCursor();
+        return $isCreate;
     }
 
-    public function login($email, $password) {
+/*     public function getUserByName($user_firstname, $user_lastname) {
+        $sql = "SELECT * FROM user WHERE user_firstname = :user_firstname AND user_lastname = :user_lastname";
+        $stmt = $this->connect()->prepare($sql);
+        $stmt->bindParam(':user_firstname', $user_firstname, PDO::PARAM_STR);
+        $stmt->bindParam(':user_lastname', $user_lastname, PDO::PARAM_STR);
+        $stmt->execute();
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        $stmt->closeCursor();
+        return $row;
+    } */
+
+    public function getUserByEmail($email) {
         $sql = "SELECT * FROM user WHERE email = :email";
         $stmt = $this->connect()->prepare($sql);
-        $stmt->bindParam(':email', $email);
+        $stmt->bindParam(':email', $email, PDO::PARAM_STR);
         $stmt->execute();
-        $user = $stmt->fetch(PDO::FETCH_ASSOC);
-
-        if ($user && password_verify($password, $user['password'])) {
-            return $user;
-        }
-        return false;
+        $users = $stmt->fetch(PDO::FETCH_ASSOC);
+        $stmt->closeCursor();
+        return $users;
     }
-    
+
+    public function isAccountValid($email, $password) {
+        $sql = "SELECT password FROM user WHERE email = :email";
+        $stmt = $this->connect()->prepare($sql);
+        $stmt->bindParam(':email', $email, PDO::PARAM_STR);
+        $stmt->execute();
+        $passwordDB = $stmt->fetch(PDO::FETCH_ASSOC);
+        $stmt->closeCursor();
+        return password_verify($password, $passwordDB['password']);
+    }
+
     public function getUserById($user_id) {
         $sql = "SELECT * FROM user WHERE user_id = :user_id";
         $stmt = $this->connect()->prepare($sql);
-        $stmt->bindParam(':user_id', $user_id);
+        $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
         $stmt->execute();
-        $user_id = $stmt->fetch(PDO::FETCH_ASSOC);
+        $datasUser = $stmt->fetch(PDO::FETCH_ASSOC);
         $stmt->closeCursor();
-        return $user_id;
+        return $datasUser;
     }
 }     
 ?>

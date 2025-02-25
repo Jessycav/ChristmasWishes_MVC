@@ -19,23 +19,22 @@ ob_start(); //Stocke les informations temporairement
                             <th>Prénom du destinataire</th>
                             <th>Actions</th>
                         </thead>
-                        <tbody>
-                            <?php 
-                            //Boucle sur la variable result
-                            foreach($myWishlists as $myWishlist) {
-                            ?>
+                        <tbody> 
+                            <?php if(!empty($myWishlists)): ?>
                                 <tr>
-                                    <td><?= htmlspecialchars($myWishlist['wishlist_year']) ?></td>
-                                    <td><?= htmlspecialchars($myWishlist['wishlist_recipient']) ?></td>
-                                    <td>
-                                        <a href="user_list_detail.php?wishlist_id=<?= $myWishlist['wishlist_id'] ?>"><i class="fa-solid fa-eye"></i></a>
-                                        <i class="fa-solid fa-pen-to-square"></i>
-                                        <i class="fa-solid fa-trash-can"></i>
-                                    </td>
+                                    <?php foreach($myWishlists as $myWishlist): ?>
+                                        <td><?= htmlspecialchars($myWishlist['wishlist_year']) ?></td>
+                                        <td><?= htmlspecialchars($myWishlist['wishlist_recipient']) ?></td>
+                                        <td>
+                                            <a href="<?= ROOT ?>monCompte/voirListe"><i class="fa-solid fa-eye"></i></a>
+                                            <a href="<?= ROOT ?>monCompte/modifierListe"><i class="fa-solid fa-pen-to-square"></i></a>
+                                            <a href="<?= ROOT ?>monCompte/supprimerListe"><i class="fa-solid fa-trash-can"></i></a>
+                                        </td>
+                                    <?php endforeach; ?>
                                 </tr>
-                            <?php
-                            }
-                            ?>
+                            <?php else: ?>
+                                <p>Aucune liste de souhaits créée</p>
+                            <?php endif; ?>
                         </tbody>
                     </table>                        
                     <div class="col-12 text-center new-list-btn">
@@ -51,17 +50,17 @@ ob_start(); //Stocke les informations temporairement
                                         </button>
                                     </div>
                                     <div class="modal-body">
-                                        <form method="POST" action="createWishlist">
+                                        <form method="POST" action="<?=ROOT?>monCompte/gestionListe/nouvelleListe">
                                             <div class="form-floating">
-                                                <input type="text" class="form-control" id="floatingInput" name="wishlist_year" placeholder="Year" aria-label="Year">
+                                                <input type="text" class="form-control" id="floatingInput" name="wishlist_year" placeholder="Year" aria-label="Year" required>
                                                 <label for="floatingInput">Année</label>
                                             </div>
                                             <div class="form-floating">
-                                                <input type="text" class="form-control" id="floatingInput" name="wishlist_recipient" placeholder="First name" aria-label="First name">
+                                                <input type="text" class="form-control" id="floatingInput" name="wishlist_recipient" placeholder="First name" aria-label="First name" required>
                                                 <label for="floatingInput">Prénom</label>
                                             </div>
                                             <div class="modal-footer d-flex justify-content-center">
-                                                <button type="submit" class="btn btn-success text-center" name="add_list">Ajouter la liste</button>
+                                                <button type="submit" class="btn btn-success text-center" name="createNewWishlist">Ajouter la liste</button>
                                             </div>
                                         </form>
                                     </div>
