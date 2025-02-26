@@ -1,7 +1,7 @@
 <?php
 
 session_start();
-var_dump($_SESSION);
+//var_dump($_SESSION);
 $user_id = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null;
 
 define("ROOT", str_replace("index.php", "", (isset($_SERVER['HTTPS']) ? "https" : "http") . "://" . $_SERVER['HTTP_HOST'] . $_SERVER["PHP_SELF"]));
@@ -76,7 +76,7 @@ try {
                     break;
 
                 case "profil":
-                    if ($useri_d) {   
+                    if ($user_id) {   
                         $user_id = $_SESSION['user_id'];                 
                         $datasUser = $usersController->showProfile($user_id); // Définition de la variable avant inclusion
                         include './views/pages/myAccountPage.php';
@@ -91,25 +91,57 @@ try {
 
                 case "mesListes":
                     $myWishlists = $wishlistsController->showUserWishlists(); //Objet appelle la méthode authPage
-                    include './views/pages/viewMyListsPage.php';
+                    include './views/pages/myListsPage.php';
                     break;
                     
                 case "gestionListe":
                     switch($url[2]) {
+                        case "DetailDeMaListe":
+                            $myDetailListe = $giftsController->viewGifts();
+                            break;
+
                         case "nouvelleListe":
+                            $wishlist_year = filter_var($_POST['wishlist_year'], FILTER_VALIDATE_INT);
+                            $wishlist_recipient = htmlspecialchars($_POST['wishlist_recipient'], ENT_QUOTES);
+                            $user_id = $_SESSION['user_id'];                            
+                            //var_dump($_POST);
+                            //var_dump($wishlist_year, $wishlist_recipient);
+                            //exit();
                             //Sécuriser les informations
-                            if (empty($wishlist_year) || empty($wishlist_recipient)) {
+                            if(empty($wishlist_year) || empty($wishlist_recipient)) {
                                 throw new Exception("Tous les champs sont requis");
                             }
                             $wishlistsController->createNewWishlist($wishlist_year, $wishlist_recipient, $user_id);
                             break;
-                        //case "modifierListe":
-                            //$wishlistsController->updateWishlist();
-                            //break;
+
+                        case "modifierListe":
+                            $wishlist_id = htmlentities($_POST['wishlist_id']);
+                            $wishlistsController->modifyWishlist($wishlist_id);
+                            break;
                         
                         case "supprimerListe":
+                            $wishlist_id = htmlentities($_POST['wishlist_id']);
                             $wishlistsController->deleteWishlist($wishlist_id);
                             break;
+
+                        case "nouveauCadeau":
+                            $gift_title = htmlspecialchars($_POST['gift_title'], ENT_QUOTES);
+                            $gift_description = htmlspecialchars($_POST['gift_description'], ENT_QUOTES);
+                            $gift_link = htmlspecialchars($_POST['gift_link'], ENT_QUOTES);
+                            $gift_image = htmlspecialchars($_POST['gift_image'], ENT_QUOTES);                          
+                            $wishlist_id = htmlentities($_POST['wishlist_id']);
+
+                            //Sécuriser les informations
+                            if(empty($gift_title) || empty($gift_description)) {
+                                throw new Exception("Tous les champs sont requis");
+                            }
+                            $giftsController->createNewGift();
+                            break;
+                        case "supprimerCadeau":
+                            $gift_id = htmlentities($_POST['gift_id']);
+                            $giftsController->deleteGift($gift_id);
+                            break;
+                            
                     }
                     break;
     

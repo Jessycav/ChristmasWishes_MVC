@@ -41,15 +41,33 @@ class WishlistsModel extends Database {
         $stmt->bindParam(":wishlist_year", $wishlist_year, PDO::PARAM_INT);
         $stmt->bindParam(":wishlist_recipient", $wishlist_recipient, PDO::PARAM_STR);
         $stmt->bindParam(":user_id", $user_id, PDO::PARAM_INT);
-        $stmt->execute();
+        $newWishlist = $stmt->execute();
+        $stmt->closeCursor(); 
+        return $newWishlist;     
     }    
 
-    public function deleteWishlist($wishlist_id) {
+    public function deleteWishlistById($wishlist_id) {
         $sql = "DELETE FROM wishlist WHERE wishlist_id = :wishlist_id";
         $stmt = $this->connect()->prepare($sql);
         $stmt->bindParam(":wishlist_id", $wishlist_id, PDO::PARAM_INT);
-        return $stmt->execute();
-    }    
+        $stmt->execute();
+        $stmt->closeCursor();
+        return true;
+    }  
+    
+    public function getListDetailById($wishlist_id) {
+        $sql = "SELECT
+        gift.*,
+        wishlist.wishlist_id
+        FROM gift INNER JOIN wishlist ON gift.wishlist_id = wishlist.wishlist_id
+        WHERE gift.wishlist_id = :wishlist_id";
+        $stmt = $this->connect()->prepare($sql);
+        $stmt->bindParam(":wishlist_id", $wishlist_id, PDO::PARAM_INT);
+        $stmt->execute();
+        $datas = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $stmt->closeCursor();
+        return $datas;
+    }
     
 /*     public function getWishlistById($wishlist_id) {
         $sql = "SELECT * FROM wishlist WHERE wishlist_id = :wishlist_id";
@@ -60,13 +78,5 @@ class WishlistsModel extends Database {
     } */
 }    
 
-/*public function getListDetail() {
-        $sql = "SELECT * FROM gift WHERE wishlist_id = :wishlist_id";
-        $stmt = $this->connect()->prepare($sql);
-        $stmt->bindParam(":wishlist_id", $wishlist_id);
-        $stmt->execute();
-        $wishlists = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        $stmt->closeCursor();
-        return $wishlists;
-    }*/
+
        

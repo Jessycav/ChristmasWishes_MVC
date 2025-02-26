@@ -6,7 +6,7 @@ ob_start();
     <div class="container">
         <div class="container-header row">
             <div class="col-12 text-center">
-                <h2>Ma liste en détail</h2>
+                <h2>Les listes en détail</h2>
             </div>
             <hr>
         </div>
