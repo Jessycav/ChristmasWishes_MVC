@@ -2,7 +2,7 @@
 ob_start(); //Stocke les informations temporairement
 ?>
 
-<section id="page">
+<section id="dashboard">
     <div class="container">
         <div class="container-header row">
             <div class="col-12 text-center">

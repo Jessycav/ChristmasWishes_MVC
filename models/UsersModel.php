@@ -28,19 +28,8 @@ class UsersModel extends Database {
         $isCreate = ($stmt->rowCount()>0);
         $stmt->closeCursor();
         return $isCreate;
-    }
-
-/*     public function getUserByName($user_firstname, $user_lastname) {
-        $sql = "SELECT * FROM user WHERE user_firstname = :user_firstname AND user_lastname = :user_lastname";
-        $stmt = $this->connect()->prepare($sql);
-        $stmt->bindParam(':user_firstname', $user_firstname, PDO::PARAM_STR);
-        $stmt->bindParam(':user_lastname', $user_lastname, PDO::PARAM_STR);
-        $stmt->execute();
-        $row = $stmt->fetch(PDO::FETCH_ASSOC);
-        $stmt->closeCursor();
-        return $row;
-    } */
-
+    }    
+    
     public function getUserByEmail($email) {
         $sql = "SELECT * FROM user WHERE email = :email";
         $stmt = $this->connect()->prepare($sql);

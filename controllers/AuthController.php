@@ -6,6 +6,5 @@ class AuthController { //Création de la classe
     public function authPage() { 
         require_once ("./views/pages/authenticationPage.php");
     }
-    
 }
 ?>

@@ -37,7 +37,10 @@ ob_start(); //Stocke les informations temporairement
                         <div class="card-body">
                             <h5 class="card-title">Liste pour <?php echo htmlspecialchars($wishlist['wishlist_recipient']); ?></h5>
                             <p class="card-text">Voici tous les présents souhaités par <?php echo htmlspecialchars($wishlist['wishlist_recipient']); ?></p>
-                            <a href="<?=ROOT?>listes/detailListe" class="btn">Voir la liste</a>
+                            <form action="<?= ROOT ?>listes/detailListe" method="POST">
+                                <input type="hidden" value="<?= $wishlist['wishlist_id'] ?>" name="wishlist_id">
+                                <button class="btn" type="submit">Voir la liste</button>                                        
+                            </form>
                         </div>
                         <div class="card-footer text-body-secondary">
                             Ajouté par [Nom] [Prénom]
@@ -45,67 +48,6 @@ ob_start(); //Stocke les informations temporairement
                         <?php endforeach; ?>
                     </div>
                 </div>
-                <!-- Fin d'une carte -->
-                <!--<div class="col">
-                    <div class="card text-center">
-                        <div class="card-header">
-                            LISTE DE NOEL - [Année]
-                        </div>
-                        <div class="card-body">
-                            <h5 class="card-title">Liste pour [Prénom]</h5>
-                            <p class="card-text">Voici tous les présents souhaités par [Prénom]</p>
-                            <a href="list_detail.php" class="btn">Voir la liste</a>
-                        </div>
-                        <div class="card-footer text-body-secondary">
-                            Ajouté par [Nom] [Prénom]
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card">
-                        <div class="card-header">
-                            LISTE DE NOEL - [Année]
-                        </div>
-                        <div class="card-body">
-                            <h5 class="card-title">Liste pour [Prénom]</h5>
-                            <p class="card-text">Voici tous les présents souhaités par [Prénom]</p>
-                            <a href="list_detail.php" class="btn">Voir la liste</a>
-                        </div>
-                        <div class="card-footer text-body-secondary">
-                            Ajouté par [Nom] [Prénom]
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card">
-                        <div class="card-header">
-                            LISTE DE NOEL - [Année]
-                        </div>
-                        <div class="card-body">
-                            <h5 class="card-title">Liste pour [Prénom]</h5>
-                            <p class="card-text">Voici tous les présents souhaités par [Prénom]</p>
-                            <a href="list_detail.php" class="btn">Voir la liste</a>
-                        </div>
-                        <div class="card-footer text-body-secondary">
-                            Ajouté par [Nom] [Prénom]
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card">
-                        <div class="card-header">
-                            LISTE DE NOEL - [Année]
-                        </div>
-                        <div class="card-body">
-                            <h5 class="card-title">Liste pour [Prénom]</h5>
-                            <p class="card-text">Voici tous les présents souhaités par [Prénom]</p>
-                            <a href="list_detail.php" class="btn">Voir la liste</a>
-                        </div>
-                        <div class="card-footer text-body-secondary">
-                            Ajouté par [Nom] [Prénom]
-                        </div>
-                    </div>
-                </div>-->
             </div>
         </div>
     </div>

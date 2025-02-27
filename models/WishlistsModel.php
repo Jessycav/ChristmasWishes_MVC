@@ -44,17 +44,8 @@ class WishlistsModel extends Database {
         $newWishlist = $stmt->execute();
         $stmt->closeCursor(); 
         return $newWishlist;     
-    }    
-
-    public function deleteWishlistById($wishlist_id) {
-        $sql = "DELETE FROM wishlist WHERE wishlist_id = :wishlist_id";
-        $stmt = $this->connect()->prepare($sql);
-        $stmt->bindParam(":wishlist_id", $wishlist_id, PDO::PARAM_INT);
-        $stmt->execute();
-        $stmt->closeCursor();
-        return true;
     }  
-    
+
     public function getListDetailById($wishlist_id) {
         $sql = "SELECT
         gift.*,
@@ -68,6 +59,17 @@ class WishlistsModel extends Database {
         $stmt->closeCursor();
         return $datas;
     }
+    
+    public function deleteWishlistById($wishlist_id) {
+        $sql = "DELETE FROM wishlist WHERE wishlist_id = :wishlist_id";
+        $stmt = $this->connect()->prepare($sql);
+        $stmt->bindParam(":wishlist_id", $wishlist_id, PDO::PARAM_INT);
+        $stmt->execute();
+        $stmt->closeCursor();
+        return true;
+    }  
+    
+
     
 /*     public function getWishlistById($wishlist_id) {
         $sql = "SELECT * FROM wishlist WHERE wishlist_id = :wishlist_id";

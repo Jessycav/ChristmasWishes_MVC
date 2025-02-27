@@ -39,6 +39,11 @@ class WishlistsController {
         }
     }
 
+    public function modifyWishlist($wishlist_id) {
+        $datas = $this->wishlistsModel->getListDetailById($wishlist_id);
+        include './views/pages/modifyWishlistPage.php';   
+    }
+    
     public function deleteWishlist($wishlist_id) {
         if ($this->wishlistsModel->deleteWishlistById($wishlist_id)) {
             header("Location:" . ROOT . "monCompte/mesListes");
@@ -46,18 +51,6 @@ class WishlistsController {
         } else {
             throw new Exception("Erreur de suppression de la liste");
         }
-
     }
-
-    public function modifyWishlist($wishlist_id) {
-        $datas = $this->wishlistsModel->getListDetailById($wishlist_id);
-        include './views/pages/myListDetailPage.php';
-    }
-    
-/*     public function viewWishlistDetail($wishlist_id) {
-        return $this->wishlistsModel->getWishlistById($wishlist_id);
-    }
- */
-
 }
 ?>

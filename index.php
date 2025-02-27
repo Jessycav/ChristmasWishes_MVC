@@ -1,22 +1,30 @@
+<!-- Fichier routeur point d'entrée de l'application -->
 <?php
 
-session_start();
-//var_dump($_SESSION);
+session_start(); // Démarre une session
+// Vérifier si un utilisateur est connecté -<stockage dans la variable $user_id
 $user_id = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null;
 
+/* Définir l'URL de base du projet avec : 
+-> détection site HTTP ou HTTPS
+-> récupération du nom de domaine 
+-> récupération URL complète
+-> suppression index.php pour garder la racine du projet */
 define("ROOT", str_replace("index.php", "", (isset($_SERVER['HTTPS']) ? "https" : "http") . "://" . $_SERVER['HTTP_HOST'] . $_SERVER["PHP_SELF"]));
 
+// Chargement des controlleurs
 require_once ("./controllers/HomeController.php");
-$homeController = new HomeController(); // Instancie la classe HomeController grâce à l'objet homeController
+$homeController = new HomeController(); // Instancie le controleur en objet
 require_once ("./controllers/WishlistsController.php");
 $wishlistsController = new WishlistsController();
 require_once ("./controllers/AuthController.php");
 $authController = new AuthController();
-require_once ("./controllers/GiftsController.php");
-$giftsController = new GiftsController();
 require_once ("./controllers/UsersController.php");
 $usersController = new UsersController();
 $dashboardController = new UsersController(); 
+require_once ("./controllers/GiftsController.php");
+$giftsController = new GiftsController();
+
 
 
 try {
@@ -38,7 +46,9 @@ try {
                     $wishlistsController->allLists(); //Objet appelle la méthode allLists
                     break;
                 case "detailListe":
-                    $giftsController->allGifts();
+                    $wishlist_id = isset($_POST['wishlist_id']) ? htmlentities($_POST['wishlist_id']) :
+                    (isset($_GET['id']) ? htmlentities($_GET['id']) : null);
+                    $giftsController->showGiftsByWishlist();
                     break;
                 default:
                     throw new Exception ("La page Listes demandée n'existe pas");
@@ -46,115 +56,13 @@ try {
             break;
 
         case "monCompte":
-            switch($url[1]) {        
-                case "authentification":
-                    $authController->authPage(); //Objet appelle la méthode authPage
-                    break;
-                    
-                case "inscription":
-                    $user_firstname = htmlentities($_POST['user_firstname']);
-                    $user_lastname = htmlentities($_POST['user_lastname']);
-                    $email = htmlentities($_POST['email']);
-                    $password = htmlentities($_POST['password']);
-                    if(empty($user_firstname) || empty($user_lastname) || empty($email) || empty($password)) {
-                        throw new Exception("Veuillez remplir tous les champs");
-                    }
-                    $usersController->createAccount($user_firstname, $user_lastname, $email, $password);
-                    break;
-                
-                case "connexion":
-                    $email = htmlentities($_POST['email']);
-                    $password = htmlentities($_POST['password']); 
-                    if(empty($email) || empty($password)) {
-                        throw new Exception("Veuillez remplir tous les champs");
-                    }                   
-                    $usersController->login($email, $password);
-                    break;
-                
-                case "dashboard":
-                    $dashboardController->dashboardPage(); 
-                    break;
-
-                case "profil":
-                    if ($user_id) {   
-                        $user_id = $_SESSION['user_id'];                 
-                        $datasUser = $usersController->showProfile($user_id); // Définition de la variable avant inclusion
-                        include './views/pages/myAccountPage.php';
-                    } else {
-                        header("Location:" . ROOT . "monCompte/authentification");
-                    }
-                    break;
-                
-                case "logout":
-                    $usersController->logout();
-                    break;
-
-                case "mesListes":
-                    $myWishlists = $wishlistsController->showUserWishlists(); //Objet appelle la méthode authPage
-                    include './views/pages/myListsPage.php';
-                    break;
-                    
-                case "gestionListe":
-                    switch($url[2]) {
-                        case "DetailDeMaListe":
-                            $myDetailListe = $giftsController->viewGifts();
-                            break;
-
-                        case "nouvelleListe":
-                            $wishlist_year = filter_var($_POST['wishlist_year'], FILTER_VALIDATE_INT);
-                            $wishlist_recipient = htmlspecialchars($_POST['wishlist_recipient'], ENT_QUOTES);
-                            $user_id = $_SESSION['user_id'];                            
-                            //var_dump($_POST);
-                            //var_dump($wishlist_year, $wishlist_recipient);
-                            //exit();
-                            //Sécuriser les informations
-                            if(empty($wishlist_year) || empty($wishlist_recipient)) {
-                                throw new Exception("Tous les champs sont requis");
-                            }
-                            $wishlistsController->createNewWishlist($wishlist_year, $wishlist_recipient, $user_id);
-                            break;
-
-                        case "modifierListe":
-                            $wishlist_id = htmlentities($_POST['wishlist_id']);
-                            $wishlistsController->modifyWishlist($wishlist_id);
-                            break;
-                        
-                        case "supprimerListe":
-                            $wishlist_id = htmlentities($_POST['wishlist_id']);
-                            $wishlistsController->deleteWishlist($wishlist_id);
-                            break;
-
-                        case "nouveauCadeau":
-                            $gift_title = htmlspecialchars($_POST['gift_title'], ENT_QUOTES);
-                            $gift_description = htmlspecialchars($_POST['gift_description'], ENT_QUOTES);
-                            $gift_link = htmlspecialchars($_POST['gift_link'], ENT_QUOTES);
-                            $gift_image = htmlspecialchars($_POST['gift_image'], ENT_QUOTES);                          
-                            $wishlist_id = htmlentities($_POST['wishlist_id']);
-
-                            //Sécuriser les informations
-                            if(empty($gift_title) || empty($gift_description)) {
-                                throw new Exception("Tous les champs sont requis");
-                            }
-                            $giftsController->createNewGift();
-                            break;
-                        case "supprimerCadeau":
-                            $gift_id = htmlentities($_POST['gift_id']);
-                            $giftsController->deleteGift($gift_id);
-                            break;
-                            
-                    }
-                    break;
-    
-
-
-                default:
-                    throw new Exception ("La page Mon Compte demandée n'existe pas");
-            }
+            require_once('./indexComponents/usersIndex.php');
             break;
-        
+                  
         default:
-            throw new Exception ("La page demandée n'existe pas");
+            throw new Exception ("La page demandée n'existe pas");        
     }
+
 } catch(Exception $e) {
     echo "Erreur: " . $e->getMessage();
 }

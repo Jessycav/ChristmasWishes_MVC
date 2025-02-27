@@ -2,7 +2,7 @@
 ob_start(); //Stocke les informations temporairement
 ?>
 
-<section id="page">
+<section id="dashboard">
     <div class="container">
         <div class="container-header row">
             <div class="col-12 text-center">
@@ -36,7 +36,7 @@ ob_start(); //Stocke les informations temporairement
                                                 <label for="floatingInput">Prénom</label>
                                             </div>
                                             <div class="modal-footer d-flex justify-content-center">
-                                                <button type="submit" class="btn btn-success text-center" name="createNewWishlist">Ajouter la liste</button>
+                                                <button type="submit" class="btn btn-success text-center" name="NewWishlist">Ajouter la liste</button>
                                             </div>
                                         </form>
                                     </div>
@@ -57,13 +57,9 @@ ob_start(); //Stocke les informations temporairement
                                         <td><?= htmlspecialchars($myWishlist['wishlist_year']) ?></td>
                                         <td><?= htmlspecialchars($myWishlist['wishlist_recipient']) ?></td>
                                         <td>
-                                            <form action="<?= ROOT ?>monCompte/gestionListe/DetailDeMaListe" method="POST">
-                                                <input type="hidden" value="<?= $myWishlist['wishlist_id'] ?>" name="wishlist_id">
-                                                <button class="btn" type="submit"><i class="fa-solid fa-eye"></i></button>
-                                            </form>
                                             <form action="<?= ROOT ?>monCompte/gestionListe/modifierListe" method="POST">
                                                 <input type="hidden" value="<?= $myWishlist['wishlist_id'] ?>" name="wishlist_id">
-                                                <button class="btn" type="submit"><i class="fa-solid fa-pen-to-square"></i></button>
+                                                <button class="btn" type="submit"><i class="fa-solid fa-pen-to-square"></i></button>                                        
                                             </form>
                                             <form action="<?= ROOT ?>monCompte/gestionListe/supprimerListe" method="POST">
                                                 <input type="hidden" value="<?= $myWishlist['wishlist_id'] ?>" name="wishlist_id">

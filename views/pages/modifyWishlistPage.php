@@ -1,6 +1,5 @@
 <?php
 ob_start();
-exit();
 ?>
 
 <section id="dashboard">
@@ -27,7 +26,7 @@ exit();
                                 </div>
                                 <div class="modal-body">
                                     <form method="POST" action="<?= ROOT ?>monCompte/gestionListe/nouveauCadeau">
-                                        <input type="hidden" name="wishlist_id" value="<?= $_POST['wishlist_id'] ?>">
+                                        <input type="hidden" name="wishlist_id" value="<?= htmlspecialchars($_POST['wishlist_id']) ?>">
                                         <div class="form-floating">
                                             <input type="text" class="form-control" id="floatingInput" name="gift_title" placeholder="Title" aria-label="Title" required>
                                             <label for="floatingInput">Titre</label>

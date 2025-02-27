@@ -10,10 +10,6 @@ class UsersController {
         $this->usersModel = new UsersModel();
     }
 
-    public function dashboardPage() { 
-        require_once ("./views/pages/dashboardPage.php");
-    } 
-    
     public function createAccount($user_firstname, $user_lastname, $email, $password) {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
@@ -43,6 +39,10 @@ class UsersController {
         }
     }
 
+    public function dashboardPage() { 
+        require_once ("./views/pages/dashboardPage.php");
+    } 
+    
     public function showProfile($user_id) {
         return $this->usersModel->getUserById($user_id);
     }
@@ -51,20 +51,5 @@ class UsersController {
         session_destroy();
         header("Location: " . ROOT);
     }
-
-/*         if($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
-            $password = $_POST['password'];
-
-            $user = $this->usersModel->login($email, $password);
-
-            if ($user) {
-                $_SESSION['user_id'] = $user['user_id'];
-                header("Location: /monCompte/dashboard");
-                exit();
-            } else {
-                echo "Email ou mot de passe incorrect";
-            }
-        } */
 }
 ?>

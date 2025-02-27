@@ -57,25 +57,6 @@ ob_start(); //Stocke les informations temporairement
                                 <input type="password" class="form-control" id="floatingPassword" name="password" placeholder="Password">
                                 <label for="floatingPassword"><i class="fa-solid fa-key me-2"></i>Mot de passe</label>
                             </div>
-                            <div class="form-floating col-12">
-                                <!-- Bouton fenêtre modale -->
-                                <a href="<?=ROOT?>monCompte/authentification"><button type="submit" class="btn" name="createAccount" data-bs-toggle="modal" data-bs-target="#exampleModal">S'inscrire</button></a>
-
-                                <!-- Fenêtre modale -->
-                                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog modal-dialog-centered">
-                                        <div class="modal-content">
-                                            <div class="modal-body">
-                                                <p>Votre inscription est enregistrée !</p>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn" data-bs-dismiss="modal">Fermer</button>
-                                                <a href="<?=ROOT?>monCompte/dashboard"><button type="button" class="btn">Voir mon compte</button></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                         </form>
                     </div>
                 </div>

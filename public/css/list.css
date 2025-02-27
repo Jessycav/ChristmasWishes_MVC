@@ -41,9 +41,3 @@
     border-radius: 5px;
     cursor: pointer;
 }
-
-#page .container .wishlist .card .offer-button[data-status="offered"] {
-    background-color: #ccc;
-    color: var(--red);
-    cursor: not-allowed;
-}
