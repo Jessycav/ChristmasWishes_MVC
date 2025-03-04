@@ -28,7 +28,10 @@ switch($url[1]) {
         break;
     
     case "dashboard":
-        $dashboardController->dashboardPage(); 
+        $wishlistCount = $wishlistsController->getUserWishlistsCount();
+        include './views/pages/dashboardPage.php';
+        
+        $usersController->dashboardPage(); 
         break;
 
     case "profil":

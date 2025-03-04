@@ -18,9 +18,6 @@
                             <a class="nav-link" href="<?= ROOT ?>monCompte/authentification" >Connexion</a>
                         </li>
                     <?php else: ?>
-                    <!-- <div>
-                        <a href="<?= ROOT ?>monCompte/profil"><button class="btn me-4 w-auto">Mon compte</button></a>
-                    </div> -->
                         <li class="nav-item">
                             <a class="nav-link" href="<?= ROOT ?>monCompte/dashboard">Dashboard</a>
                         </li>

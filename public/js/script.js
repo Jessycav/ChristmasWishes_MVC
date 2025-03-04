@@ -16,3 +16,15 @@ const interval = setInterval(appendSnowflake, 80);
 setTimeout(() => {
     clearInterval(interval);
 }, 3000);
+
+// Sélection des pages affichées dans l'espace client
+/* document.addEventListener("DOMContentLoaded", function () {
+    let links = document.querySelectorAll(".sidebar-link");
+    let currentUrl = window.location.pathname; //Récupère l'URL de la page
+
+    links.forEach(link => {
+        if (link.getAttribute("href") === currentUrl) {
+            link.parentElement.classList.add("active"); //Ajout classe active
+        }
+    });
+}); */

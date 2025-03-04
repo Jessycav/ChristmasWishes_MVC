@@ -67,18 +67,15 @@ class WishlistsModel extends Database {
         $stmt->execute();
         $stmt->closeCursor();
         return true;
-    }  
+    }
     
-
-    
-/*     public function getWishlistById($wishlist_id) {
-        $sql = "SELECT * FROM wishlist WHERE wishlist_id = :wishlist_id";
+    public function countUserWishlists($user_id) {
+        $sql = "SELECT COUNT(*) as total FROM wishlist WHERE user_id = :user_id";
         $stmt = $this->connect()->prepare($sql);
-        $stmt->bindParam(":wishlist_id", $wishlist_id, PDO::PARAM_INT);
+        $stmt->bindParam(":user_id", $user_id, PDO::PARAM_INT);
         $stmt->execute();
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
-    } */
+        $wishlistCount = $stmt->fetch(PDO::FETCH_ASSOC);
+        $stmt->closeCursor();
+        return $wishlistCount['total'] ?? 0; // Retourne 0 si aucune liste n'a été créée
+    }
 }    
-
-
-       

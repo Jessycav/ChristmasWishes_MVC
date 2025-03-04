@@ -24,30 +24,28 @@ ob_start(); //Stocke les informations temporairement
             </div>
             <br>
             <hr>
-            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-3">
                 <!-- Une carte -->
-                <div class="col">
-                    <div class="card">                        
-                        <?php 
-                        foreach ($wishlists as $wishlist): 
-                        ?>
-                        <div class="card-header">
-                            LISTE DE NOEL - <?php echo htmlspecialchars($wishlist['wishlist_year']); ?>
+                <?php foreach ($wishlists as $wishlist): ?> 
+                    <div class="col">
+                        <div class="card">                        
+                            <div class="card-header">
+                                LISTE DE NOEL - <?php echo htmlspecialchars($wishlist['wishlist_year']); ?>
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">Liste pour <?php echo htmlspecialchars($wishlist['wishlist_recipient']); ?></h5>
+                                <p class="card-text">Voici tous les présents souhaités par <?php echo htmlspecialchars($wishlist['wishlist_recipient']); ?></p>
+                                <form action="<?= ROOT ?>listes/detailListe" method="POST">
+                                    <input type="hidden" value="<?= $wishlist['wishlist_id'] ?>" name="wishlist_id">
+                                    <button class="btn" type="submit">Voir la liste</button>                                        
+                                </form>
+                            </div>
+                            <div class="card-footer text-body-secondary">
+                                Ajouté par [Nom] [Prénom]
+                            </div>
                         </div>
-                        <div class="card-body">
-                            <h5 class="card-title">Liste pour <?php echo htmlspecialchars($wishlist['wishlist_recipient']); ?></h5>
-                            <p class="card-text">Voici tous les présents souhaités par <?php echo htmlspecialchars($wishlist['wishlist_recipient']); ?></p>
-                            <form action="<?= ROOT ?>listes/detailListe" method="POST">
-                                <input type="hidden" value="<?= $wishlist['wishlist_id'] ?>" name="wishlist_id">
-                                <button class="btn" type="submit">Voir la liste</button>                                        
-                            </form>
-                        </div>
-                        <div class="card-footer text-body-secondary">
-                            Ajouté par [Nom] [Prénom]
-                        </div>
-                        <?php endforeach; ?>
                     </div>
-                </div>
+                <?php endforeach; ?>
             </div>
         </div>
     </div>

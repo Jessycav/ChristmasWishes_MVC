@@ -21,11 +21,8 @@ require_once ("./controllers/AuthController.php");
 $authController = new AuthController();
 require_once ("./controllers/UsersController.php");
 $usersController = new UsersController();
-$dashboardController = new UsersController(); 
 require_once ("./controllers/GiftsController.php");
 $giftsController = new GiftsController();
-
-
 
 try {
     if (empty($_GET['page'])) { //Vérifie si le paramètre page est vide

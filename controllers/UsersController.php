@@ -40,7 +40,7 @@ class UsersController {
     }
 
     public function dashboardPage() { 
-        require_once ("./views/pages/dashboardPage.php");
+        require __DIR__ . '/../views/pages/dashboardPage.php';
     } 
     
     public function showProfile($user_id) {

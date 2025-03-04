@@ -52,5 +52,12 @@ class WishlistsController {
             throw new Exception("Erreur de suppression de la liste");
         }
     }
+
+    public function getUserWishlistsCount() {
+        if (!isset($_SESSION['user_id'])) {
+            return 0;
+        }
+        $wishlistCount = $this->wishlistsModel->countUserWishlists($_SESSION['user_id']);
+        return $wishlistCount;
+    }    
 }
-?>
