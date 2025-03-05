@@ -5,9 +5,9 @@
 
 switch($url[2]) {
 /*                         case "detailDeMaListe":
-            $wishlist_id = htmlentities($_POST['wishlist_id']);
-            $giftsController->viewGifts($wishlist_id);
-            break;
+    $wishlist_id = htmlentities($_POST['wishlist_id']);
+    $giftsController->viewGifts($wishlist_id);
+    break;
 */
     case "nouvelleListe":
         $wishlist_year = filter_var($_POST['wishlist_year'], FILTER_VALIDATE_INT);

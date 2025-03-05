@@ -57,6 +57,9 @@ ob_start(); //Stocke les informations temporairement
                                 <input type="password" class="form-control" id="floatingPassword" name="password" placeholder="Password">
                                 <label for="floatingPassword"><i class="fa-solid fa-key me-2"></i>Mot de passe</label>
                             </div>
+                            <div class="col-12">
+                                <a href="<?=ROOT?>monCompte/authentification"><button type="submit" name="register" class="btn">S'inscrire</button></a>
+                            </div>
                         </form>
                     </div>
                 </div>

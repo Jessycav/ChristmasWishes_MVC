@@ -2,7 +2,6 @@
 ob_start();
 ?>
 
-
 <div id="page-content-wrapper" class="container-fluid d-flex align-items-center my-4">
     <div class="row">
         <h2 class="text-align-center text-uppercase fs-2 m-0">Ma liste en détail</h2>

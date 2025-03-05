@@ -22,13 +22,14 @@
     max-width: 100vw;
 }
 
-#dashboard button .btn {
+#dashboard #wrapper button .btn {
     margin-top: 2%;
-    padding: 0.8rem 1rem;
-    background-color: var(--gold);
-    font-size: 1.5rem;
-    font-weight: bold;
     border-color: var(--red);
     border-radius: 5px;
     cursor: pointer;
+}
+
+.table img .img-thumbnail {
+    width: 80px !important;
+    height: 80px !important;
 }

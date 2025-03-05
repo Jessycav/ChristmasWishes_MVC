@@ -6,7 +6,7 @@ ob_start(); //Stocke les informations temporairement
     <div class="row">
         <h2 class="text-align-center text-uppercase fs-2 m-0">Mon profil</h2>
         <hr>
-        <div class="col-md-4">
+        <div class="col-md-8 col-lg-10">
             <div class="card mb-3">
                 <div class="card-body">
                     <h4 class="card-title">Informations personnelles</h4>

@@ -6,7 +6,7 @@ ob_start();
     <div class="row">
         <h2 class="text-align-center text-uppercase fs-2 m-0">Ma liste en détail</h2>
         <hr>
-        <div class="col-12 text-center new-list-btn">
+        <div class="col-12 text-center">
             <input type="submit" class="btn" name="addGift" data-bs-toggle="modal" data-bs-target="#AddNewGiftModal" value="+ Nouveau cadeau">
             <!-- Fenêtre modale -->
             <div class="modal fade" id="AddNewGiftModal" tabindex="-1" aria-labelledby="AddNewGiftModal" aria-hidden="true">
@@ -50,10 +50,10 @@ ob_start();
             <table class="table align-middle table-striped table-hover">
                 <thead>
                     <tr class="table align-middle">
+                        <th scope="col">Image</th>
                         <th scope="col">Titre</th>
                         <th scope="col">Description</th>
                         <th scope="col">Lien</th>
-                        <th scope="col">Image</th>
                         <th scope="col">Actions</th>
                     </tr>
                 </thead>
@@ -61,10 +61,13 @@ ob_start();
                     <tr class="table align-middle">
                         <?php if(!empty($datas)): ?>
                             <?php foreach($datas as $data): ?>
-                                <td><?= html_entity_decode($data['gift_title']) ?></td>
-                                <td><?= html_entity_decode($data['gift_description']) ?></td>
-                                <td><?= html_entity_decode($data['gift_link']) ?></td>
-                                <td><?= html_entity_decode($data['gift_image']) ?></td>
+                                <td ><img src="<?= html_entity_decode($data['gift_image']) ?>" 
+                                    class="img-thumbnail" style="width: 100px;">
+                                </td>
+                                <td ><?= html_entity_decode($data['gift_title']) ?></td>
+                                <td ><?= html_entity_decode($data['gift_description']) ?></td>
+                                <td ><?= html_entity_decode($data['gift_link']) ?></td>
+
                                 <td>
                                     <form action="<?= ROOT ?>monCompte/gestionListe/modifierCadeau" method="POST">
                                         <input type="hidden" value="<?= $data['gift_id'] ?>" name="gift_id">
