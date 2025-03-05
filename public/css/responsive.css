@@ -13,6 +13,15 @@
         margin-top: 1rem;
         width: 100%;
     }
+
+    #page .container .container-fluid .row .sidebar {
+        height: 100vh !important;
+    }
+
+    #page-content-wrapper {
+        max-width: 0;
+        width: 100%;
+    }
 }
 
 @media (min-width: 1024px) {

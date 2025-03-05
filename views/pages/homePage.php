@@ -13,11 +13,12 @@ ob_start(); //Stocke les informations temporairement
         <p>Grâce à ce site, créer gratuitement votre liste de Noël en y rassemblant toutes vos envies.</p>
         <br>
         <p>Partager facilement votre wishlist avec vos proches !</p>      
-        <a href="/authentication"><button type="submit" class="btn">Commencer ma liste</button></a>
+        <a href="<?=ROOT?>monCompte/authentification"><button type="submit" class="btn">Commencer ma liste</button></a>
     </div>
 </section>
 
 <?php
 $content = ob_get_clean(); // Renvoie les informations stokées et vide le stockage
-require_once("app/views/components/layout.php");
+require_once("./views/components/layout.php");
+
 ?>
