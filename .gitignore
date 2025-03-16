@@ -1,2 +1,2 @@
-# Dossier à ignorer
-config/
+# Fichier à ignorer
+config/Database.php
