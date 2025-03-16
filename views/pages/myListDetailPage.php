@@ -88,5 +88,5 @@ ob_start();
 
 <?php
 $content = ob_get_clean(); // Renvoie les informations stokées et vide le stockage
-require_once("./views/components/userLayout.php");
+require_once __DIR__ . "/../views/components/userLayout.php";
 ?>

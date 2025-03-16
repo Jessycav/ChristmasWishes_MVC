@@ -19,13 +19,13 @@
 </head>
 <body class="min-vh-100 d-flex flex-column">
 
-    <?php require_once ("./views/components/header.php") ?>
+    <?php require_once __DIR__ . "/../views/components/header.php" ?>
 
     <main class="flex-grow-1">
         <?= $content ?>
     </main>
 
-    <?php require_once ("./views/components/footer.php") ?>
+    <?php require_once __DIR__ . "/../views/components/footer.php" ?>
     <script src="<?=ROOT?>js/script.js"></script>
     <script src="https://kit.fontawesome.com/4c6fdf51a1.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script> 

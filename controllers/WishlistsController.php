@@ -1,6 +1,6 @@
 <?php
 
-require_once("./models/WishlistsModel.php");
+require_once __DIR__ . "/../models/WishlistsModel.php";
 
 class WishlistsController {
     

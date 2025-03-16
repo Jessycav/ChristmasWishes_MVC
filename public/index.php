@@ -12,15 +12,15 @@ $user_id = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null;
 define("ROOT", (isset($_SERVER["HTTPS"]) && $_SERVER["HTTPS"] === "on" ? "https" : "http") . "://" . $_SERVER["HTTP_HOST"] . "/");
 
 // Chargement des controlleurs
-require_once ("./controllers/HomeController.php");
+require_once __DIR__ . "/../controllers/HomeController.php";
 $homeController = new HomeController(); // Instancie le controleur en objet
-require_once ("./controllers/WishlistsController.php");
+require_once __DIR__ . "/../controllers/WishlistsController.php";
 $wishlistsController = new WishlistsController();
-require_once ("./controllers/AuthController.php");
+require_once __DIR__ . "/../controllers/AuthController.php";
 $authController = new AuthController();
-require_once ("./controllers/UsersController.php");
+require_once __DIR__ . "/../controllers/UsersController.php";
 $usersController = new UsersController();
-require_once ("./controllers/GiftsController.php");
+require_once __DIR__ . "/../controllers/GiftsController.php";
 $giftsController = new GiftsController();
 
 try {
@@ -52,7 +52,7 @@ try {
             break;
 
         case "monCompte":
-            require_once('./indexComponents/usersIndex.php');
+            require_once __DIR__ . "/../indexComponents/usersIndex.php";
             break;
                   
         default:

@@ -1,6 +1,6 @@
 <?php
 
-require_once("./models/GiftsModel.php");
+require_once __DIR__ . "/../models/GiftsModel.php";
 
 class GiftsController {
 
@@ -16,7 +16,7 @@ class GiftsController {
         } 
         $wishlist_id = intval($_POST['wishlist_id']);
         $gifts = $this->giftsModel->getGiftsByWishlist($wishlist_id);
-        require_once './views/pages/listDetailPage.php';
+        require_once __DIR__ . "/../views/pages/listDetailPage.php";
     }
 
     public function createNewGift() {
