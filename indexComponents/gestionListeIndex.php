@@ -46,7 +46,7 @@ switch($url[2]) {
         }
         $giftsController->createNewGift();
         break;
-
+        
     case "supprimerCadeau":
         $gift_id = htmlentities($_POST['gift_id']);
         $giftsController->deleteGift($gift_id);
@@ -68,6 +68,11 @@ switch($url[2]) {
         } else {
             echo "Accès interdit";
         }
+        break;
+    
+    case "voirCadeau":
+        $gift_id = intval($_POST['gift_id']);
+        $giftsController->viewOneGiftDetail($gift_id);
         break;
     
     default:

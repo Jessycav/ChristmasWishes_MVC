@@ -89,6 +89,17 @@ class GiftsModel extends Database {
         $stmt->bindParam(":gift_id", $gift_id, PDO::PARAM_INT);
         $stmt->execute();
         return $stmt->fetchColumn(); // Retourne l'ID Liste
-
     }    
+
+    public function getGiftDetailById($gift_id) {
+        $sql = "SELECT gift.*, wishlist.wishlist_id
+        FROM gift JOIN wishlist ON gift.wishlist_id = wishlist.wishlist_id
+        WHERE gift_id = :gift_id";
+        $stmt = $this->connect()->prepare($sql);
+        $stmt->bindParam(":gift_id", $gift_id, PDO::PARAM_INT);
+        $stmt->execute();
+        $oneGift = $stmt->fetch(PDO::FETCH_ASSOC);
+        $stmt->closeCursor();
+        return $oneGift;
+    }
 }

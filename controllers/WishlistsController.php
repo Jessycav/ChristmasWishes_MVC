@@ -41,7 +41,7 @@ class WishlistsController {
 
     public function modifyWishlist($wishlist_id) {
         $datas = $this->wishlistsModel->getListDetailById($wishlist_id);
-        include './views/pages/modifyWishlistPage.php';   
+        require __DIR__ . '/../views/pages/modifyWishlistPage.php';   
     }
     
     public function deleteWishlist($wishlist_id) {
