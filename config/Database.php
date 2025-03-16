@@ -1,18 +1,24 @@
 <?php
 
-abstract class Database
-{
+abstract class Database {
     public static $pdo;
 
-    private $host = "localhost";
-    private $dbName = "christmas_wishes";
-    private $user = "root";
-    private $password = "";
+    private $host;
+    private $dbName;
+    private $user;
+    private $password;
 
-    protected function connect()
-    {
+    protected function connect() {
         try {
-            $dsn = 'mysql:host=' . $this->host . ';dbname=' . $this->dbName;
+            $url = getenv('JAWSDB_URL');
+            $dbparts = parse_url($url);
+
+            $this->host = $dbparts['host'];
+            $this->user = $dbparts['user'];
+            $this->password = $dbparts['pass'];
+            $this->dbName = ltrim($dbparts['path'],'/');
+
+            $dsn = 'mysql:host=' . $this->host . ';dbname=' . $this->dbName . ";charset=utf8";
             $pdo = new PDO($dsn, $this->user, $this->password);
             $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         } catch (PDOException $exception) {
