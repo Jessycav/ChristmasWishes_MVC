@@ -1,25 +1,26 @@
 CREATE TABLE `gift` (
-  `gift_id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  `gift_title` varchar(255) NOT NULL,
-  `gift_description` text DEFAULT NULL,
-  `gift_link` varchar(255) DEFAULT NULL,
-  `gift_image` varchar(255) DEFAULT NULL,
-  `wishlist_id` int(11) DEFAULT NULL,
+  `gift_id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `gift_title` VARCHAR(255) NOT NULL,
+  `gift_description` TEXT DEFAULT NULL,
+  `gift_link` VARCHAR(255) DEFAULT NULL,
+  `gift_image` VARCHAR(255) DEFAULT NULL,
+  `wishlist_id` INT(11) DEFAULT NULL,
   FOREIGN KEY (`wishlist_id`) REFERENCES `wishlist` (`wishlist_id`) ON DELETE CASCADE
 ) 
 
 CREATE TABLE `user` (
-  `user_id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  `user_firstname` varchar(150) DEFAULT NULL,
-  `user_lastname` varchar(150) DEFAULT NULL,
-  `email` varchar(255) DEFAULT NULL UNIQUE,
-  `password` varchar(255) DEFAULT NULL,
+  `user_id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `user_firstname` VARCHAR(150) DEFAULT NULL,
+  `user_lastname` VARCHAR(150) DEFAULT NULL,
+  `email` VARCHAR(255) DEFAULT NULL,
+  `password` VARCHAR(255) DEFAULT NULL,
+  UNIQUE (`email`)
 ) 
 
 CREATE TABLE `wishlist` (
-  `wishlist_id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  `wishlist_year` int(4) NOT NULL,
-  `wishlist_recipient` varchar(150) NOT NULL,
-  `user_id` int(11) DEFAULT NULL,
+  `wishlist_id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `wishlist_year` INT NOT NULL,
+  `wishlist_recipient` VARCHAR(150) NOT NULL,
+  `user_id` INT(11) DEFAULT NULL,
   FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE
 ) 
