@@ -52,23 +52,22 @@ ob_start();
                     <tr class="table align-middle">
                         <th scope="col">Image</th>
                         <th scope="col">Titre</th>
-                        <th scope="col">Description</th>
-                        <th scope="col">Lien</th>
                         <th scope="col">Actions</th>
                     </tr>
                 </thead>
-                <tbody> 
-                    <tr class="table align-middle">
-                        <?php if(!empty($datas)): ?>
-                            <?php foreach($datas as $data): ?>
-                                <td ><img src="<?= html_entity_decode($data['gift_image']) ?>" 
+                <tbody class="table align-middle"> 
+                    <?php if(!empty($datas)): ?>
+                        <?php foreach($datas as $data): ?>
+                            <tr>
+                                <td><img src="<?= html_entity_decode($data['gift_image']) ?>" 
                                     class="img-thumbnail" style="width: 100px;">
                                 </td>
                                 <td ><?= html_entity_decode($data['gift_title']) ?></td>
-                                <td ><?= html_entity_decode($data['gift_description']) ?></td>
-                                <td ><?= html_entity_decode($data['gift_link']) ?></td>
-
                                 <td>
+                                    <form action="<?= ROOT ?>monCompte/gestionListe/voirCadeau" method="POST">
+                                        <input type="hidden" value="<?= $data['gift_id'] ?>" name="gift_id">
+                                        <button class="btn" type="submit"><i class="fa-solid fa-eye"></i></button>                                        
+                                    </form>
                                     <form action="<?= ROOT ?>monCompte/gestionListe/modifierCadeau" method="POST">
                                         <input type="hidden" value="<?= $data['gift_id'] ?>" name="gift_id">
                                         <button class="btn" type="submit"><i class="fa-solid fa-pen-to-square"></i></button>                                        
@@ -78,16 +77,18 @@ ob_start();
                                         <button class="btn" type="submit" name="submit"><i class="fa-solid fa-trash-can"></i></button>
                                     </form>
                                 </td>
-                            <?php endforeach; ?>                                    
-                        <?php else: ?>
-                            <p>Aucune liste de souhaits créée</p>
-                        <?php endif; ?>
-                    </tr>
+                            </tr>
+                        <?php endforeach; ?>                                    
+                    <?php else: ?>
+                        <p>Aucune liste de souhaits créée</p>
+                    <?php endif; ?>
                 </tbody>
             </table>    
         </div>
-            
-        <a href="<?= ROOT ?>monCompte/mesListes"><button class="btn" type="submit" name="submit">Retour à mes listes</button></a>
+        <form action="<?= ROOT ?>monCompte/mesListes" method="POST">
+            <input type="hidden" value="<?= $data['wishlist_id'] ?>" name="wishlist_id">
+            <button class="btn" type="submit" name="submit">Retour à mes listes</button>
+        </form>
     </div>               
 </div>            
 

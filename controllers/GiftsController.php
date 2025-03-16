@@ -73,4 +73,13 @@ class GiftsController {
             throw new Exception("Erreur lors de la modification du cadeau");
         }
     }
+
+    public function viewOneGiftDetail($gift_id) {
+        $gift_id = intval($_POST['gift_id']);
+        $oneGift = $this->giftsModel->getGiftDetailById($gift_id);
+        if (empty($oneGift)) {
+            die("Cadeau introuvable");
+        }
+        require __DIR__ . '/../views/pages/viewGiftDetailPage.php';
+    }
 }
