@@ -10,7 +10,7 @@ $user_id = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null;
 
 // Définir l'URL de base du projet
 
-define("ROOT", "https://" . $_SERVER["HTTP_HOST"]);
+define("ROOT", "https://" . $_SERVER["HTTP_HOST"] . "/");
 
 // Chargement des controlleurs
 require_once __DIR__ . '/../controllers/HomeController.php';
