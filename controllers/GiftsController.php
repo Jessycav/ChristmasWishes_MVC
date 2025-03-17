@@ -1,6 +1,6 @@
 <?php
 
-require_once __DIR__ . "/../models/GiftsModel.php";
+require_once __DIR__ . '/../models/GiftsModel.php';
 
 class GiftsController {
 
@@ -16,7 +16,7 @@ class GiftsController {
         } 
         $wishlist_id = intval($_POST['wishlist_id']);
         $gifts = $this->giftsModel->getGiftsByWishlist($wishlist_id);
-        require_once __DIR__ . "/../views/pages/listDetailPage.php";
+        require_once __DIR__ . '/../pages/listDetailPage.php';
     }
 
     public function createNewGift() {
@@ -52,7 +52,7 @@ class GiftsController {
         if (empty($gift)) {
             die("Cadeau introuvable");
         }
-        require_once __DIR__ . '/../views/pages/editGiftPage.php'; // Page du formulaire de modification
+        require_once __DIR__ . '/../pages/editGiftPage.php'; // Page du formulaire de modification
     }    
     
     public function updateGift() {

@@ -20,7 +20,7 @@
 <body class="min-vh-100 d-flex flex-column">
     <section id="dashboard">
         <div class="d-flex" id="wrapper">
-            <?php require_once __DIR__ . "/../views/components/userHeader.php" ?>
+            <?php require_once __DIR__ . '/../components/userHeader.php' ?>
 
             <main class="flex-grow-1">
                 <?= $content ?>
@@ -28,7 +28,7 @@
         </div>
     </section>
 
-    <?php require_once __DIR__ . "/../views/components/footer.php" ?>
+    <?php require_once __DIR__ . '/../components/footer.php' ?>
     <script src="<?=ROOT?>js/script.js"></script>
     <script src="https://kit.fontawesome.com/4c6fdf51a1.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script> 

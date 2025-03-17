@@ -1,6 +1,6 @@
 <?php
 
-require_once __DIR__ . "/../config/Database.php"; //Connexion à la base de données
+require_once __DIR__ . '/../config/Database.php'; //Connexion à la base de données
 
 class WishlistsModel extends Database {
     private $wishlist_id;
