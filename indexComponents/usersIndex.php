@@ -29,7 +29,7 @@ switch($url[1]) {
     
     case "dashboard":
         $wishlistCount = $wishlistsController->getUserWishlistsCount();
-        include './views/pages/dashboardPage.php';
+        require_once __DIR__ . '/../views/pages/dashboardPage.php';
         
         $usersController->dashboardPage(); 
         break;
@@ -38,7 +38,7 @@ switch($url[1]) {
         if ($user_id) {   
             $user_id = $_SESSION['user_id'];                 
             $datasUser = $usersController->showProfile($user_id); // Définition de la variable avant inclusion
-            include './views/pages/myAccountPage.php';
+            require_once __DIR__ . '/../views/pages/myAccountPage.php';
         } else {
             header("Location:" . ROOT . "monCompte/authentification");
         }
@@ -46,7 +46,7 @@ switch($url[1]) {
     
     case "mesListes":
         $myWishlists = $wishlistsController->showUserWishlists(); //Objet appelle la méthode authPage
-        include './views/pages/myListsPage.php';
+        require_once __DIR__ . '/../views/pages/myListsPage.php';
         break;
 
     case "logout":
@@ -54,7 +54,7 @@ switch($url[1]) {
         break;
 
     case "gestionListe":
-        require_once('./indexComponents/gestionListeIndex.php');
+        require_once __DIR__ . '/../indexComponents/gestionListeIndex.php';
         break;
 
     default:
