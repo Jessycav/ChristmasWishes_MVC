@@ -26,7 +26,7 @@ $giftsController = new GiftsController();
 
 try {
     if (empty($_GET['page'])) { //Vérifie si le paramètre page est vide
-        $url[0] = "accueil"; //Renvoie une page d'accueil par défaut
+        $url[0] = "test_db.php"; //Renvoie une page d'accueil par défaut
     } else {
         // Divise l'URL en plusieurs parties en nettoyant l'URL pour la sécurité
         $url = explode("/", filter_var($_GET['page'],FILTER_SANITIZE_URL));
