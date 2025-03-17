@@ -1,5 +1,8 @@
 <!-- Fichier routeur point d'entrée de l'application -->
 <?php
+ini_set('display_errors',1);
+ini_set('display_stratup_errors', 1);
+error_reporting(E_ALL);
 
 session_start(); // Démarre une session
 // Vérifier si un utilisateur est connecté -<stockage dans la variable $user_id
