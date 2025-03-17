@@ -15,7 +15,7 @@
                     </li>                
                     <?php if(empty($_SESSION)): ?>
                         <li class="nav-item">
-                            <a class="nav-link" href="<?= ROOT ?>monCompte/authentification" >Connexion</a>
+                            <a class="nav-link" href="<?= ROOT ?>monCompte/authentification">Connexion</a>
                         </li>
                     <?php else: ?>
                         <li class="nav-item">
