@@ -12,7 +12,7 @@ class WishlistsController {
 
     public function allLists() {
         $wishlists = $this->wishlistsModel->getAllLists();
-        require __DIR__ . '/../pages/allListsPage.php';
+        require __DIR__ . '/../views/pages/allListsPage.php';
     }
 
     public function showUserWishlists() {
