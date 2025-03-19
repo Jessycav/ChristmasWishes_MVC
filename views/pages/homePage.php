@@ -8,11 +8,11 @@ ob_start(); //Stocke les informations temporairement
     </div>
     <div class="main">
         <h1>Ma liste de Noël</h1>
-        <h2>Créer une liste de cadeaux de Noël personnalisée</h2>
+        <h2>Créez une liste de cadeaux de Noël personnalisée</h2>
         <br>
-        <p>Grâce à ce site, créer gratuitement votre liste de Noël en y rassemblant toutes vos envies.</p>
+        <p>Grâce à ce site, créez gratuitement votre liste de Noël en y rassemblant toutes vos envies.</p>
         <br>
-        <p>Partager facilement votre wishlist avec vos proches !</p>      
+        <p>Partagez facilement votre wishlist avec vos proches !</p>      
         <a href="<?=ROOT?>monCompte/authentification"><button type="submit" class="btn">Commencer ma liste</button></a>
     </div>
 </section>
