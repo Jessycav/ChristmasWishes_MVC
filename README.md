@@ -19,3 +19,6 @@ Ce guide permettra d'installer le projet en local avec XAMPP
 
 1. Configurer les variables d'environnement pour PHP et MySQL
 2. Ajouter le chemin d'accès des fichiers exécutables PHP et MySQL à la ariable d'environnement `PATH` du système.
+
+### Déploiement
+Le site est visible à l'adresse : https://christmas-wishes-project-600cb483f5a7.herokuapp.com/
